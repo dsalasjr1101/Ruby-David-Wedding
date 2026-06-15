@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- =====================================================
+   ✏️ EDIT WEBSITE TITLE
+===================================================== -->
+<title>Ruby & David's Wedding</title>
+
+<style>
+
+/* =====================================================
+   🎨 COLOR THEME
+   ✏️ EDIT COLORS HERE
+===================================================== */
+
+:root{
+
+  --dark:#2b1b14;
+  --brown:#6b4a36;
+  --light:#f6eadf;
+  --gold:#c7a27c;
+  --text:#3b2a22;
+
+}
+
+/* =====================================================
+   🌎 GLOBAL STYLE
+===================================================== */
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+
+  margin:0;
+  font-family:Georgia, serif;
+  background:var(--light);
+  color:var(--text);
+  overflow-x:hidden;
+
+}
+
+/* =====================================================
+   🎬 SAVE THE DATE INTRO
+===================================================== */
+
+#intro{
+
+  position:fixed;
+  inset:0;
+
+  background:
+  radial-gradient(circle at center,
+  #3a241b,
+  #120b08);
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  text-align:center;
+
+  z-index:99999;
+
+  animation:fadeOut 1s ease 2s forwards;
+
+}
+
+/* ✏️ EDIT INTRO TITLE SIZE */
+#intro h1{
+
+  font-size:clamp(2.5rem, 5vw, 5rem);
+  color:var(--gold);
+  margin-bottom:10px;
+
+}
+
+/* ✏️ EDIT INTRO SUBTITLE SIZE */
+#intro p{
+
+  font-size:1.2rem;
+  color:#f5e6d8;
+
+}
+
+@keyframes fadeOut{
+
+  to{
+    opacity:0;
+    visibility:hidden;
+  }
+}
+/* =====================================================
+   ⚠️ LOGIN SHAKE ANIMATION (ADD HERE)
+===================================================== */
+
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+}
+
+#loginScreen.error {
+  animation: shake 0.3s;
+  }
+
+
+/* =====================================================
+   🔐 PASSWORD SCREEN
+===================================================== */
+#loginScreen{
+
+  position:fixed;
+  inset:0;
+
+  background:var(--dark);
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  z-index:99998;
+
+  color:white;
+
+  padding:20px;
+
+}
+
+/* ✏️ EDIT PASSWORD SCREEN TITLE SIZE */
+#loginScreen h1{
+
+  font-size:2.4rem;
+
+}
+/* ✏️ EDIT ENTER BUTTON SIZE */
+#loginScreen button{
+
+  width:200px;
+  padding:12px 18px;
+
+  font-size:1.1rem;
+
+  margin-top:12px;
+
+  border:none;
+  border-radius:10px;
+
+  cursor:pointer;
+
+  position:relative;
+  z-index:5;
+
+}
+/* ✏️ EDIT PASSWORD BOX SIZE */
+#passwordInput{
+
+  width:280px;
+  padding:14px 16px;
+
+  font-size:1.1rem;
+
+  border:none;
+  border-radius:10px;
+
+  margin-top:12px;
+
+  position:relative;
+  z-index:5;
+
+}
+/* =====================================================
+   🏠 HERO SECTION
+===================================================== */
+
+.hero{
+
+  position:relative;
+  height:100vh;
+  overflow:hidden;
+
+}
+
+/* =====================================================
+   📸 SLIDESHOW IMAGES
+===================================================== */
+
+.slide{
+
+  position:absolute;
+  inset:0;
+
+  background-size:cover;
+  background-position:center;
+
+  opacity:0;
+
+  animation:fade 24s infinite;
+
+}
+
+/* =====================================================
+   ✏️ EDIT SLIDESHOW IMAGES HERE
+===================================================== */
+
+.slide:nth-child(1){
+  background-image:url("images/photo1.jpg");
+  animation-delay:0s;
+}
+
+.slide:nth-child(2){
+  background-image:url("images/photo2.jpg");
+  animation-delay:6s;
+}
+
+.slide:nth-child(3){
+  background-image:url("images/photo3.jpg");
+  animation-delay:12s;
+}
+
+.slide:nth-child(4){
+  background-image:url("images/photo4.jpg");
+  animation-delay:18s;
+}
+
+@keyframes fade{
+  0%{opacity:0;}
+  10%{opacity:1;}
+  25%{opacity:1;}
+  35%{opacity:0;}
+}
+
+/* =====================================================
+   🌑 DARK OVERLAY
+===================================================== */
+
+.overlay{
+
+  position:absolute;
+  inset:0;
+
+  background:rgba(30,15,10,0.55);
+
+}
+
+/* =====================================================
+   🏠 HERO CONTENT
+===================================================== */
+
+.hero-content{
+
+  position:relative;
+  z-index:2;
+
+  height:100%;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  text-align:center;
+  color:white;
+
+  padding:20px;
+
+}
+
+/* =====================================================
+   💍 MONOGRAM
+===================================================== */
+
+.monogram{
+
+  width:150px;
+  height:150px;
+
+  border-radius:50%;
+
+  border:2px solid var(--gold);
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  margin-bottom:25px;
+
+  background:rgba(255,255,255,0.08);
+
+  backdrop-filter:blur(8px);
+
+  transform-style:preserve-3d;
+
+  animation:monogramReveal 2.5s ease-out forwards;
+
+
+}
+
+/* ✏️ EDIT INITIAL SIZE */
+.monogram span{
+  font-size:3rem;
+}
+
+/* =====================================================
+   ✨ TEST MONOGRAM ANIMATION
+===================================================== */
+
+.monogram.animate{
+  animation:testSpin 3s ease forwards;
+}
+
+@keyframes testSpin{
+
+  0%{
+    transform:scale(0.1) rotate(0deg);
+    opacity:0;
+  }
+
+  50%{
+    transform:scale(1.5) rotate(720deg);
+    opacity:1;
+  }
+
+  100%{
+    transform:scale(1) rotate(0deg);
+    opacity:1;
+  }
+
+}
+
+/* =====================================================
+   🧭 NAVIGATION (FIXED HORIZONTAL)
+===================================================== */
+
+.top-nav{
+
+  position:fixed;
+  top:18px;
+  left:50%;
+  transform:translateX(-50%);
+
+  z-index:9999;
+
+  display:flex;
+  flex-wrap:nowrap;
+
+  gap:6px;
+
+  justify-content:center;
+
+  background:rgba(43,27,20,0.45);
+
+  backdrop-filter:blur(14px);
+
+  border-radius:999px;
+
+  padding:8px 10px;
+
+  width:fit-content;
+
+  max-width:95%;
+
+  overflow-x:auto;
+
+}
+
+/* =====================================================
+   🧭 NAV BUTTONS
+===================================================== */
+
+.top-nav button{
+
+  position:relative;
+
+  background:none;
+  border:none;
+
+  color:white;
+
+  padding:10px 14px;
+
+  font-size:0.9rem;
+
+  cursor:pointer;
+
+}
+
+.top-nav button:hover{
+  color:var(--gold);
+}
+
+.top-nav button.active-tab{
+  color:var(--gold);
+}
+
+/* =====================================================
+   📄 TAB SECTIONS
+===================================================== */
+
+.tab{
+
+  display:none;
+
+  padding:50px 20px;
+
+  max-width:1000px;
+
+  margin:auto;
+
+}
+
+.tab{
+  text-align:center;
+}
+
+.tab.active{
+  display:block;
+}
+
+/* =====================================================
+   📦 CARD STYLE
+===================================================== */
+
+.card{
+
+  background:white;
+
+  padding:60px;
+
+  border-radius:24px;
+
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+}
+/* =====================================================
+   ✨ COUNTDOWN
+===================================================== */
+
+.countdown-wrapper{
+
+  margin-top:35px;
+
+  display:flex;
+
+  justify-content:center;
+
+  gap:18px;
+
+  flex-wrap:wrap;
+
+}
+
+.countdown-box{
+
+  background:white;
+
+  width:130px;
+
+  height:130px;
+
+  border-radius:26px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:center;
+
+  align-items:center;
+
+}
+
+.countdown-number{
+
+  font-size:2.5rem;
+
+  font-weight:bold;
+
+  color:var(--brown);
+
+}
+
+.countdown-label{
+
+  font-size:0.8rem;
+
+  letter-spacing:2px;
+
+  text-transform:uppercase;
+
+  color:var(--gold);
+
+}
+
+/* =====================================================
+   🖼 GALLERY
+===================================================== */
+
+.gallery-grid{
+
+  display:grid;
+
+  grid-template-columns:repeat(3,1fr);
+
+  gap:12px;
+
+  margin-top:20px;
+
+}
+
+.gallery-grid img{
+
+  width:100%;
+
+  height:280px;
+
+  object-fit:cover;
+
+  border-radius:16px;
+
+}
+.gallery-grid video{
+
+  width:100%;
+  height:280px;
+
+  object-fit:cover;
+
+  border-radius:16px;
+
+}
+/* =====================================================
+   📱 MOBILE
+===================================================== */
+
+@media(max-width:700px){
+
+  .gallery-grid{
+    grid-template-columns:1fr;
+  }
+
+  .countdown-box{
+    width:95px;
+    height:95px;
+  }
+
+  .countdown-number{
+    font-size:1.8rem;
+  }
+
+  .top-nav{
+    border-radius:22px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+   🎬 INTRO SCREEN
+===================================================== -->
+
+<div id="intro">
+
+<!-- ✏️ EDIT INTRO TEXT -->
+<h1>Save the Date</h1>
+
+<!-- ✏️ EDIT INTRO SUBTITLE -->
+<p>Ruby & David • September 06, 2026</p>
+
+</div>
+
+<!-- =====================================================
+   🔐 PASSWORD SCREEN
+===================================================== -->
+
+<div id="loginScreen">
+
+<!-- ✏️ EDIT COUPLE NAMES -->
+<h1>Ruby & David </h1>
+
+<!-- ✏️ EDIT PASSWORD -->
+<input 
+id="passwordInput" 
+type="password" 
+placeholder="Enter Password"
+onkeypress="if(event.key === 'Enter'){checkPassword()}"
+>
+
+<button onclick="checkPassword()">Enter</button>
+
+</div>
+
+<!-- =====================================================
+   🏠 HERO SECTION
+===================================================== -->
+
+<section class="hero">
+
+<div class="slide"></div>
+<div class="slide"></div>
+<div class="slide"></div>
+<div class="slide"></div>
+
+<div class="overlay"></div>
+
+<!-- =====================================================
+   🧭 NAVIGATION (RSVP REMOVED)
+===================================================== -->
+
+<nav class="top-nav">
+
+<button onclick="showTab('home',event)">Home</button>
+<button onclick="showTab('info',event)">Info</button>
+<button onclick="showTab('schedule',event)">Schedule</button>
+<button onclick="showTab('gallery',event)">Gallery</button>
+<button onclick="showTab('registry',event)">Registry</button>
+<button onclick="showTab('hotel',event)">Hotel</button>
+<button onclick="showTab('faq',event)">FAQ</button>
+
+</nav>
+
+<!-- =====================================================
+   💍 HERO CONTENT
+===================================================== -->
+
+<div class="hero-content">
+
+<!-- ✏️ EDIT INITIALS -->
+<div class="monogram">
+<span>R & D </span>
+</div>
+
+<!-- ✏️ EDIT COUPLE NAMES -->
+<h1>Ruby & David</h1>
+
+<!-- ✏️ EDIT LOCATION -->
+<p>Fredericksburg, Virginia</p>
+
+</div>
+
+</section>
+
+<!-- =====================================================
+   🏠 HOME TAB
+===================================================== -->
+
+<section id="home" class="tab active">
+
+<div class="card">
+
+<h2>Welcome</h2>
+
+<!-- ✏️ EDIT MESSAGE -->
+<p>We’re so excited to celebrate our special day with you 🤎</p>
+
+<!-- =====================================================
+   ✨ COUNTDOWN
+===================================================== -->
+
+<h2 style="margin-top:40px;">Countdown to Forever</h2>
+
+<div class="countdown-wrapper">
+
+<div class="countdown-box">
+<div class="countdown-number" id="days">0</div>
+<div class="countdown-label">Days</div>
+</div>
+
+<div class="countdown-box">
+<div class="countdown-number" id="hours">0</div>
+<div class="countdown-label">Hours</div>
+</div>
+
+<div class="countdown-box">
+<div class="countdown-number" id="minutes">0</div>
+<div class="countdown-label">Minutes</div>
+</div>
+
+<div class="countdown-box">
+<div class="countdown-number" id="seconds">0</div>
+<div class="countdown-label">Seconds</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =====================================================
+   💒 INFO TAB
+===================================================== -->
+
+<section id="info" class="tab">
+<div class="card">
+<h2>Wedding Info</h2>
+<p>Arbor Haven Wedding's</p>
+
+<p>Address: 7510 Arbor Haven Ln, 
+Fredericksburg, VA 22407 US</p>
+
+<p>Reception will be held at the same place.</p>
+
+<!-- ✏️ EDIT INFO HERE -->
+
+</div>
+</section>
+
+<!-- =====================================================
+   🕓 SCHEDULE TAB
+===================================================== -->
+
+<section id="schedule" class="tab">
+<div class="card">
+<h2>Schedule</h2>
+<p>Ceremony - 4:30pm</p>
+<p>Cocktail Hour - 5-6pm : Bridal party will be taking photos during this time.</p>
+<p>Reception - 6pm-10pm</p>
+<!-- ✏️ EDIT SCHEDULE HERE -->
+
+</div>
+</section>
+
+<!-- =====================================================
+   🖼 GALLERY TAB
+===================================================== -->
+
+<section id="gallery" class="tab">
+<div class="card">
+<h2>Gallery</h2>
+
+<!-- ✏️ EDIT IMAGES HERE -->
+
+<div class="gallery-grid">
+
+   <video controls>
+    <source src="images/video1.mp4" type="video/mp4">
+  </video>
+  <img src="images/photo1.jpg" alt="Gallery Photo 1">
+  <img src="images/photo2.jpg" alt="Gallery Photo 2">
+  <img src="images/photo3.jpg" alt="Gallery Photo 3">
+  <img src="images/photo4.jpg" alt="Gallery Photo 4">
+  <img src="images/photo5.jpg" alt="Gallery Photo 5">
+  <img src="images/photo6.jpg" alt="Gallery Photo 6">
+  <img src="images/photo7.jpg" alt="Gallery Photo 7">
+  <img src="images/photo8.jpg" alt="Gallery Photo 8">
+  <img src="images/photo9.jpg" alt="Gallery Photo 9">
+  <img src="images/photo10.jpg" alt="Gallery Photo 10">
+  <img src="images/photo11.jpg" alt="Gallery Photo 11">
+  <img src="images/photo12.jpg" alt="Gallery Photo 12">
+  <img src="images/photo13.jpg" alt="Gallery Photo 13">
+  <img src="images/photo14.jpg" alt="Gallery Photo 14">
+  <img src="images/photo15.jpg" alt="Gallery Photo 15">
+  <img src="images/photo16.jpg" alt="Gallery Photo 16">
+  <img src="images/photo17.jpg" alt="Gallery Photo 17">
+
+</div>
+
+</div>
+</section>
+
+<!-- =====================================================
+   🎁 REGISTRY TAB
+===================================================== -->
+
+<section id="registry" class="tab">
+<div class="card">
+<h2>Registry</h2>
+
+<!-- ✏️ EDIT REGISTRY LINKS HERE -->
+
+<div class="link-list">
+
+  <p><a href="https://www.amazon.com/wedding/guest-view/3JREQ35M0SN5S" target="_blank">Amazon Wedding Registry</a></p>
+  <p><a href="https://www.walmart.com/registry/wr/3e423731-f4ad-415c-83ab-822e67763ec9" target="_blank">Walmart Wedding Registry</a></p>
+</div>
+
+</div>
+</section>
+
+<!-- =====================================================
+   🏨 HOTEL TAB
+===================================================== -->
+
+<section id="hotel" class="tab">
+<div class="card">
+<h2>Hotel</h2>
+
+<!-- ✏️ EDIT HOTEL INFO HERE -->
+<div class="link-list">
+
+  <p>Click below for the link to the hotel block: </p>
+  <p><a href="https://app.marriott.com/resview2?id=1773695976493&key=GRP&app=resvlink" target="_blank">The Publisher, Downtown Fredericksburg, A Tribute Portfolio Hotel</a></p>
+  <p> We are asking that you please reserve your room if necessary before Wednesday August 12th</p>
+
+
+</div>
+
+</div>
+</section>
+
+<!-- =====================================================
+   ❓ FAQ TAB
+===================================================== -->
+
+<section id="faq" class="tab">
+<div class="card">
+<h2>FAQ</h2>
+<p> All Brown Theme? Yes even the guest are asked to be in all brown to fit the theme please.</p>
+<p>Are kids allowed? While we love your little ones, we have chosen to make our wedding an adults-only celebration with a select few kids being our nieces and nephews.</p>
+<p>We are asking that everyone please be RSVP'd by July 15th.</p>
+<p>Will it be an open bar? Yes, there is an open bar and we would greatly appreciate if you would tip our bartender for their services.</p>
+<p>Will there be food? Of course, food is being catered by Mission BBQ.</p>
+<p>If it says the hotel block is full please reach out to us to see if we are available to add more to the block at the discounted rate.</p>
+<p>Any other questions that may not be answered here please feel free to reach out to us and we will try to get back to you as soon as possible</p>
+<!-- ✏️ EDIT FAQS HERE -->
+
+</div>
+</section>
+
+<script>
+
+/* =====================================================
+   🔐 PASSWORD
+===================================================== */
+
+function checkPassword(){
+  const input = document.getElementById("passwordInput");
+  const screen = document.getElementById("loginScreen");
+
+  const p = input.value;
+  const correct = "salas2026";
+
+  if(p === correct){
+    screen.style.display = "none";
+
+    setTimeout(() => {
+      document.querySelector(".monogram").classList.add("animate");
+    }, 100);
+
+  } else {
+    screen.classList.add("error");
+
+    setTimeout(() => {
+      screen.classList.remove("error");
+    }, 300);
+  }
+}
+
+/* =====================================================
+   🧭 TAB SWITCHING
+===================================================== */
+
+function showTab(id,event){
+
+  document.querySelectorAll(".tab").forEach(tab=>{
+    tab.classList.remove("active");
+  });
+
+  document.getElementById(id).classList.add("active");
+
+  document.querySelectorAll(".top-nav button").forEach(btn=>{
+    btn.classList.remove("active-tab");
+  });
+
+  event.target.classList.add("active-tab");
+}
+
+/* =====================================================
+   ✨ NAV SCROLL EFFECT
+===================================================== */
+
+window.addEventListener("scroll",()=>{
+
+  document.querySelector(".top-nav")
+  .classList.toggle("scrolled",window.scrollY > 50);
+
+});
+
+/* =====================================================
+   ⏳ COUNTDOWN
+===================================================== */
+
+const weddingDate = new Date("September 06, 2026 16:30:00").getTime();
+
+function updateCountdown(){
+
+  const now = new Date().getTime();
+  const distance = weddingDate - now;
+
+  document.getElementById("days").innerText =
+  Math.floor(distance/(1000*60*60*24));
+
+  document.getElementById("hours").innerText =
+  Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+
+  document.getElementById("minutes").innerText =
+  Math.floor((distance%(1000*60*60))/(1000*60));
+
+  document.getElementById("seconds").innerText =
+  Math.floor((distance%(1000*60))/1000);
+
+}
+
+setInterval(updateCountdown,1000);
+updateCountdown();
+
+</script>
+
+</body>
+</html>
